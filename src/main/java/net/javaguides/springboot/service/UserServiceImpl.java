@@ -78,5 +78,11 @@ public class UserServiceImpl implements UserService{
 		}		
 		return user;
 	}
+
+	@Override
+	public void deleteUserById(long id) {
+		this.userRepository.deleteById(id);
+		
+	}
 	
 }

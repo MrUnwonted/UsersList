@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.service.UserService;
@@ -68,6 +67,13 @@ public class MainController {
 		
 		return "update_user";
 		
+	}
+	
+	@GetMapping("/deleteUser/{id}")
+	public String deleteUser(@PathVariable(value = "id") long id)  {
+//		call delete user method
+		this.userService.deleteUserById(id);
+		return "redirect:/";
 	}
 	
 }

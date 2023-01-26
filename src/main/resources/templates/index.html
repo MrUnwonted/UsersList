@@ -24,7 +24,6 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
-				<a class="navbar-brand" href="#" th:href="@{/login}">Login</a>
 				<a class="navbar-brand" href="#" th:href="@{/registration}">Register</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
@@ -60,7 +59,9 @@
 	<form th:action="@{/search}" method="get">
   		<input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
   		<button type="submit" class="btn btn-info" >Search</button>
-  		<button type="submit" class="btn btn-info" >Reset</button>
+  		<!-- <button type="submit" class="btn btn-info" >Reset</button> -->
+  		<a class="btn btn-info"  th:href="@{/}">Reset</a>
+  		
   </form> 
 	<br><br>
 

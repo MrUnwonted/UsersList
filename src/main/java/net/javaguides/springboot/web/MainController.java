@@ -30,7 +30,7 @@ public class MainController {
 		   
 		   if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 		   
-		   return "login";
+		   return "user_login";
 		   }
 		   else {
 			   return "redirect:/";
@@ -53,6 +53,7 @@ public class MainController {
 	
 	@PostMapping("/saveUser")
 	public String saveUser(@ModelAttribute("user") User user) {
+		
 		userService.saveUser(user);
 		return "redirect:/";
 	}
@@ -90,4 +91,27 @@ public class MainController {
 	  }
 	  return "index";
 	 }
+	 
+	 
+	    @GetMapping("/user_login")
+	    public String viewUserLoginPage() {
+	       
+	    	 System.out.println("Hi");
+			   org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			   
+			   if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+			   
+			   return "login";
+			   }
+			   else {
+				   return "redirect:/";
+			   }
+	    }
+	     
+	    @GetMapping("/user_home")
+	    public String viewUserHomePage() {
+	        return "user_home";
+	    }
+	 
+	 
 }

@@ -84,5 +84,9 @@ public class UserServiceImpl implements UserService{
 		this.userRepository.deleteById(id);
 		
 	}
+
+	 public List<User> getByKeyword(String keyword){
+		  return userRepository.findByKeyword(keyword);
+		 }
 	
 }

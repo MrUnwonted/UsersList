@@ -1,5 +1,7 @@
 package net.javaguides.springboot.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,11 +37,11 @@ public class MainController {
 		   }
 	}
 	
-	@GetMapping("/")
-	public String viewHomePage(Model model) {
-		model.addAttribute("listUsers", userService.getAllUsers());
-		return "index";
-	}
+//	 @GetMapping("/")
+//	public String viewHomePage(Model model) {
+//		model.addAttribute("listUsers", userService.getAllUsers());
+//		return "index";
+//	}
 	
 	@GetMapping("/showNewUserForm")
 	public String showNewUserForm(Model model) {
@@ -76,4 +78,15 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	 @GetMapping({"/", "/search"})
+	 public String home(User user, Model model, String keyword) {
+	  if(keyword!=null) {
+	   List<User> list = userService.getByKeyword(keyword);
+	   model.addAttribute("listUsers", list);
+	  }else {
+	  List<User> list = userService.getAllUsers();
+	  model.addAttribute("listUsers", userService.getAllUsers());
+	  }
+	  return "index";
+	 }
 }

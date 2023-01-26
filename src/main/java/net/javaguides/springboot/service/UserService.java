@@ -13,4 +13,5 @@ public interface UserService extends UserDetailsService{
 	void saveUser(User user);
 	User getUserById(long id);
 	void deleteUserById(long id);
+	List<User> getByKeyword(String keyword);
 }

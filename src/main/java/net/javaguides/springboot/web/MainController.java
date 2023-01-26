@@ -80,12 +80,13 @@ public class MainController {
 	
 	 @GetMapping({"/", "/search"})
 	 public String home(User user, Model model, String keyword) {
+		 System.out.println(keyword);
 	  if(keyword!=null) {
-	   List<User> list = userService.getByKeyword(keyword);
-	   model.addAttribute("listUsers", list);
+		  List<User> list = userService.getByKeyword(keyword);
+		   model.addAttribute("listUsers", list);
 	  }else {
-	  List<User> list = userService.getAllUsers();
-	  model.addAttribute("listUsers", userService.getAllUsers());
+		  List<User> list = userService.getAllUsers();
+		  model.addAttribute("listUsers", list);
 	  }
 	  return "index";
 	 }

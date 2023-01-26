@@ -37,17 +37,6 @@
 	<br>
 	<br>
 
-	<!-- <div class="container">
-		<h1>Registration and Login with Spring Boot, Spring Security,
-			Thymeleaf, Hibernate and MySQL</h1>
-		Welcome <span sec:authentication="principal.username"> User</span>
-	</div> -->
-	
-	
-	
-	
-	
-	
 	
 	<div class="container my-2">
 	<h1>Users List</h1>
@@ -57,9 +46,8 @@
 	<br><br>
 	
 	<form th:action="@{/search}" method="get">
-  		<input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
+  		<input type="text" name="keyword" th:value="*{keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
   		<button type="submit" class="btn btn-info" >Search</button>
-  		<!-- <button type="submit" class="btn btn-info" >Reset</button> -->
   		<a class="btn btn-info"  th:href="@{/}">Reset</a>
   		
   </form> 
@@ -68,6 +56,10 @@
 		<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+							Id</a>
+					</th>
 					<th>
 						<a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
 							User First Name</a>
@@ -84,7 +76,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="user : ${listUsers}">
+				<tr th:each="user : ${listUsers}" th:field="${l}">
+					<td th:text="${userStat.index+1}"></td>
 					<td th:text="${user.firstName}"></td>
 					<td th:text="${user.lastName}"></td>
 					<td th:text="${user.email}"></td>
@@ -95,7 +88,7 @@
 			</tbody>
 		</table>
 		
-		<!-- <div th:if = "${totalPages > 1}">
+		<div th:if = "${totalPages > 1}"> 
 			<div class = "row col-sm-10">
 				<div class = "col-sm-2">
 					Total Rows: [[${totalItems}]] 
@@ -116,7 +109,7 @@
 					<span th:unless="${currentPage < totalPages}">Last</span>
    				 </div>
 			</div>
-		</div> -->
+		</div> 
 	</div>
 </body>
 </html>

@@ -85,8 +85,12 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
-	 public List<User> getByKeyword(String keyword){
-		  return userRepository.findByKeyword(keyword);
-		 }
+	
+	 public List<User> listAll(String keyword) {
+	        if (keyword != null) {
+	            return userRepository.search(keyword);
+	        }
+	        return userRepository.findAll();
+	    }
 	
 }

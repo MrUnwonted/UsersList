@@ -3,6 +3,8 @@ package net.javaguides.springboot.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -79,16 +81,12 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	 @GetMapping({"/", "/search"})
-	 public String home(User user, Model model, String keyword) {
-		 System.out.println(keyword);
-	  if(keyword!=null) {
-		  List<User> list = userService.getByKeyword(keyword);
-		   model.addAttribute("listUsers", list);
-	  }else {
-		  List<User> list = userService.getAllUsers();
-		  model.addAttribute("listUsers", list);
-	  }
+	 @GetMapping("/")
+	 public String viewHomePage(Model model, @Param("keyword") String keyword) {
+	        List<User> listProducts = userService.listAll(keyword);
+	        model.addAttribute("listUsers", userService.getAllUsers());
+	        model.addAttribute("listUsers", listProducts);
+	        model.addAttribute("keyword", keyword);
 	  return "index";
 	 }
 	 
